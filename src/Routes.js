@@ -10,43 +10,14 @@ import {
 import useStorage from "reducer";
 import Spinner from "component/spinner";
 
-const Dashboard = lazy(() => import("route/dashboard/dashboard"));
-const Wallet = lazy(() => import("route/wallet/wallet"));
-const WalletMng = lazy(() => import("route/wallet/manage"));
-const Plans = lazy(() => import("route/plans/plans"));
-const Plan = lazy(() => import("route/plans/plan"));
-const History = lazy(() => import("route/plans/history"));
-const Referral = lazy(() => import("route/referral/referral"));
-const Candle = lazy(() => import("route/candle/candle"));
-const Profile = lazy(() => import("route/profile/profile"));
-const Ticket = lazy(() => import("route/ticket/ticket"));
-const NewTicket = lazy(() => import("route/ticket/newTicket"));
-const ViewTicket = lazy(() => import("route/ticket/viewTicket"));
-const Register = lazy(() => import("route/sign/register"));
-const Activate = lazy(() => import("route/sign/activate"));
-const Login = lazy(() => import("route/sign/login"));
-const Forget = lazy(() => import("route/sign/forget"));
+// const Dashboard = lazy(() => import("route/dashboard/dashboard"));
 
 const route = {
   home: [
-    { path: "/dashboard", component: Dashboard },
-    { path: "/wallet", component: Wallet },
-    { path: "/wallet/:coin", component: WalletMng },
-    { path: "/plans", component: Plans },
-    { path: "/plans/:coin/:plan", component: Plan },
-    { path: "/history", component: History },
-    { path: "/referral", component: Referral },
-    { path: "/candle", component: Candle },
-    { path: "/ticket", component: Ticket },
-    { path: "/profile", component: Profile },
-    { path: "/ticket/new", component: NewTicket },
-    { path: "/ticket/view/:id", component: ViewTicket },
+    // { path: "/dashboard", component: Dashboard },
   ],
   sign: [
-    { path: "/register", component: Register },
-    { path: "/activate", component: Activate },
-    { path: "/login", component: Login },
-    { path: "/forget", component: Forget },
+    // { path: "/register", component: Register },
   ],
 };
 const AppRoutes = (props) => {
@@ -55,7 +26,7 @@ const AppRoutes = (props) => {
   const {
     setting: { isLoged },
   } = useStorage();
-  console.log(isLoged);
+
   const list = route[isLoged ? "home" : "sign"];
   const isRoute = list.find((e) => e.item == location.pathname);
 

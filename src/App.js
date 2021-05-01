@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { withRouter, useLocation } from "react-router-dom";
+import "assets/styles/bootstrap.rtl.min.css";
+import "assets/styles/app.css";
+import AppRoutes from "Routes";
+import LeftSidebar from "component/leftSidebar";
+import RightSidebar from "component/rightSidebar";
+import useStorage from "reducer";
 
-function App() {
+const App = (props) => {
+  const { setSetting } = useStorage();
+  const [state, setState] = useState({});
+  const location = useLocation();
+  useEffect(() => {
+    const body = document.querySelector("body");
+    body.classList.add("rtl");
+    // body.classList.remove("rtl");
+    // i18n.changeLanguage("en");
+    window.addEventListener("message", (event) => {
+      if (event?.data?.login) {
+        setSetting(null);
+      }
+    });
+    window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
+    const fullPageLayoutRoutes = ["/login"];
+  }, [location]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <LeftSidebar />
+      <div className="page">
+        <AppRoutes />
+      </div>
+      <RightSidebar />
+    </>
   );
-}
+};
 
-export default App;
+export default withRouter(App);
