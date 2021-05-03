@@ -3,8 +3,7 @@ import createPersistedReducer from "../persist";
 export default createPersistedReducer("setting", localStorage);
 export const initialState = {
   token: "",
-  name: "",
-  lang: "fa",
+  name: "کاربر",
   isLoged: false,
 };
 

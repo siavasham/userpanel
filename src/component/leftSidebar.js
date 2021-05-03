@@ -1,161 +1,128 @@
 import React, { useState, useEffect } from "react";
 import { t } from "locales";
 import useStorage from "reducer";
+import {
+  ProSidebar,
+  Menu,
+  MenuItem,
+  SubMenu,
+  SidebarHeader,
+  SidebarContent,
+  SidebarFooter,
+} from "react-pro-sidebar";
+import PersonIcon from "@material-ui/icons/Person";
+import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
+import CategoryIcon from "@material-ui/icons/Category";
+import BarChartIcon from "@material-ui/icons/BarChart";
+import HistoryIcon from "@material-ui/icons/History";
+import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+
+const menu = [
+  {
+    title: t("myProfile"),
+    path: "/menu",
+    icon: <PersonIcon />,
+    sub: [
+      {
+        title: t("myPrivateInfo"),
+        path: "/menu",
+      },
+      {
+        title: t("levelUp"),
+        path: "/menu",
+      },
+      {
+        title: t("myCreditNumbers"),
+        path: "/menu",
+      },
+    ],
+  },
+  {
+    title: t("myWallet"),
+    path: "/menu",
+    icon: <AccountBalanceWalletIcon />,
+    sub: [
+      {
+        title: t("walletReport"),
+        path: "/menu",
+      },
+      {
+        title: t("deposit"),
+        path: "/menu",
+      },
+      {
+        title: t("withdraw"),
+        path: "/menu",
+      },
+    ],
+  },
+  {
+    title: t("tradeCrypto"),
+    path: "/menu",
+    icon: <CategoryIcon />,
+  },
+  {
+    title: t("traderAi"),
+    path: "/menu",
+    icon: <BarChartIcon />,
+  },
+  {
+    title: t("transactionHistory"),
+    path: "/menu",
+    icon: <HistoryIcon />,
+  },
+  {
+    title: t("inbox"),
+    path: "/menu",
+    icon: <ChatBubbleOutlineIcon />,
+  },
+];
 
 export default function () {
-  const [loading, setLoading] = useState(false);
-
   const {
-    setting: { name, token },
+    setting: { name },
   } = useStorage();
-
+  const [collapsed, setCollapsed] = useState(false);
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
   }, []);
 
   return (
-    <div class="p-3">
-      <a
-        href="/"
-        class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom"
-      >
-        icon
-        <span class="fs-5 fw-semibold">Collapsible</span>
-      </a>
-      <ul class="list-unstyled ps-0">
-        <li class="mb-1">
-          <button
-            class="btn btn-toggle align-items-center rounded collapsed"
-            data-bs-toggle="collapse"
-            data-bs-target="#home-collapse"
-            aria-expanded="true"
-          >
-            Home
-          </button>
-          <div class="collapse show" id="home-collapse">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li>
-                <a href="#" class="link-dark rounded">
-                  Overview
-                </a>
-              </li>
-              <li>
-                <a href="#" class="link-dark rounded">
-                  Updates
-                </a>
-              </li>
-              <li>
-                <a href="#" class="link-dark rounded">
-                  Reports
-                </a>
-              </li>
-            </ul>
+    <div className="right-sidebar">
+      <ProSidebar rtl={true} collapsed={collapsed}>
+        <div className="toggle left" onClick={() => setCollapsed(!collapsed)}>
+          <ArrowBackIosIcon className="toggle-icon" />
+        </div>
+        <SidebarHeader>
+          <div className="profile">
+            <div className="icon">
+              <PersonOutlineIcon className="profile-icon" />
+            </div>
+            <div className="profile-text">{name}</div>
           </div>
-        </li>
-        <li class="mb-1">
-          <button
-            class="btn btn-toggle align-items-center rounded collapsed"
-            data-bs-toggle="collapse"
-            data-bs-target="#dashboard-collapse"
-            aria-expanded="false"
-          >
-            Dashboard
-          </button>
-          <div class="collapse" id="dashboard-collapse">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li>
-                <a href="#" class="link-dark rounded">
-                  Overview
-                </a>
-              </li>
-              <li>
-                <a href="#" class="link-dark rounded">
-                  Weekly
-                </a>
-              </li>
-              <li>
-                <a href="#" class="link-dark rounded">
-                  Monthly
-                </a>
-              </li>
-              <li>
-                <a href="#" class="link-dark rounded">
-                  Annually
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li class="mb-1">
-          <button
-            class="btn btn-toggle align-items-center rounded collapsed"
-            data-bs-toggle="collapse"
-            data-bs-target="#orders-collapse"
-            aria-expanded="false"
-          >
-            Orders
-          </button>
-          <div class="collapse" id="orders-collapse">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li>
-                <a href="#" class="link-dark rounded">
-                  New
-                </a>
-              </li>
-              <li>
-                <a href="#" class="link-dark rounded">
-                  Processed
-                </a>
-              </li>
-              <li>
-                <a href="#" class="link-dark rounded">
-                  Shipped
-                </a>
-              </li>
-              <li>
-                <a href="#" class="link-dark rounded">
-                  Returned
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li class="border-top my-3"></li>
-        <li class="mb-1">
-          <button
-            class="btn btn-toggle align-items-center rounded collapsed"
-            data-bs-toggle="collapse"
-            data-bs-target="#account-collapse"
-            aria-expanded="false"
-          >
-            Account
-          </button>
-          <div class="collapse" id="account-collapse">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li>
-                <a href="#" class="link-dark rounded">
-                  New...
-                </a>
-              </li>
-              <li>
-                <a href="#" class="link-dark rounded">
-                  Profile
-                </a>
-              </li>
-              <li>
-                <a href="#" class="link-dark rounded">
-                  Settings
-                </a>
-              </li>
-              <li>
-                <a href="#" class="link-dark rounded">
-                  Sign out
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
+        </SidebarHeader>
+        <SidebarContent>
+          <Menu iconShape="square">
+            {menu.map((item, i) =>
+              item?.sub ? (
+                <SubMenu title={item.title} key={i} icon={item.icon}>
+                  {item?.sub &&
+                    item?.sub.map((sub, j) => (
+                      <MenuItem key={j}>{sub.title}</MenuItem>
+                    ))}
+                </SubMenu>
+              ) : (
+                <MenuItem key={i} icon={item.icon}>
+                  {item.title}
+                </MenuItem>
+              )
+            )}
+          </Menu>
+        </SidebarContent>
+        <SidebarFooter>eeee</SidebarFooter>
+      </ProSidebar>
     </div>
   );
 }

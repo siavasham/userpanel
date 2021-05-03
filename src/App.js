@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { withRouter, useLocation } from "react-router-dom";
-import "assets/styles/bootstrap.rtl.min.css";
 import "assets/styles/app.css";
 import AppRoutes from "Routes";
 import LeftSidebar from "component/leftSidebar";

@@ -1,132 +1,87 @@
 import React, { useState, useEffect } from "react";
 import { t } from "locales";
 import useStorage from "reducer";
+import {
+  ProSidebar,
+  Menu,
+  MenuItem,
+  SubMenu,
+  SidebarHeader,
+  SidebarContent,
+  SidebarFooter,
+} from "react-pro-sidebar";
+import VerifiedUserOutlinedIcon from "@material-ui/icons/VerifiedUserOutlined";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+
+const menu = [
+  {
+    title: t("aboutUs"),
+    path: "/menu",
+    icon: <VerifiedUserOutlinedIcon />,
+  },
+  {
+    title: t("tradeCrypto"),
+    path: "/menu",
+    icon: <VerifiedUserOutlinedIcon />,
+  },
+  {
+    title: t("traderAi"),
+    path: "/menu",
+    icon: <VerifiedUserOutlinedIcon />,
+  },
+  {
+    title: t("academy"),
+    path: "/menu",
+    icon: <VerifiedUserOutlinedIcon />,
+  },
+  {
+    title: t("services"),
+    path: "/menu",
+    icon: <VerifiedUserOutlinedIcon />,
+  },
+  {
+    title: t("support"),
+    path: "/menu",
+    icon: <VerifiedUserOutlinedIcon />,
+  },
+];
 
 export default function () {
-  const [loading, setLoading] = useState(false);
-
   const {
-    setting: { name, token },
+    setting: { name },
   } = useStorage();
-
+  const [collapsed, setCollapsed] = useState(true);
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
   }, []);
 
   return (
-    <div class="d-flex flex-column">
-      <a
-        href="/"
-        class="d-block p-3 link-dark text-decoration-none"
-        title="Icon-only"
-        data-bs-toggle="tooltip"
-        data-bs-placement="right"
-      >
-        gggg
-        <span class="visually-hidden">Icon-only</span>
-      </a>
-      <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-        <li class="nav-item">
-          <a
-            href="#"
-            class="nav-link active py-3 border-bottom"
-            title="Home"
-            data-bs-toggle="tooltip"
-            data-bs-placement="right"
-          >
-            yyyy
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="nav-link py-3 border-bottom"
-            title="Dashboard"
-            data-bs-toggle="tooltip"
-            data-bs-placement="right"
-          >
-            bbb
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="nav-link py-3 border-bottom"
-            title="Orders"
-            data-bs-toggle="tooltip"
-            data-bs-placement="right"
-          >
-            vvv
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="nav-link py-3 border-bottom"
-            title="Products"
-            data-bs-toggle="tooltip"
-            data-bs-placement="right"
-          >
-            xx
-          </a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="nav-link py-3 border-bottom"
-            title="Customers"
-            data-bs-toggle="tooltip"
-            data-bs-placement="right"
-          >
-            xx
-          </a>
-        </li>
-      </ul>
-      <div class="dropdown border-top">
-        <a
-          href="#"
-          class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle"
-          id="dropdownUser3"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img
-            src="https://github.com/mdo.png"
-            alt="mdo"
-            width="24"
-            height="24"
-            class="rounded-circle"
-          />
-        </a>
-        <ul
-          class="dropdown-menu text-small shadow"
-          aria-labelledby="dropdownUser3"
-        >
-          <li>
-            <a class="dropdown-item" href="#">
-              New project...
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">
-              Settings
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">
-              Profile
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider" />
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">
-              Sign out
-            </a>
-          </li>
-        </ul>
+    <ProSidebar rtl={true} collapsed={collapsed}>
+      <div className="toggle" onClick={() => setCollapsed(!collapsed)}>
+        <ArrowForwardIosIcon className="toggle-icon" />
       </div>
-    </div>
+      <SidebarHeader>
+        <div className="brand">
+          <div className="brand-logo"></div>
+          <div className="brand-text">
+            {t("brand")}
+            <div className="brand-sub-text">{t("safe")}</div>
+          </div>
+        </div>
+      </SidebarHeader>
+      <SidebarContent>
+        <Menu iconShape="square">
+          {menu.map((item, i) => (
+            <SubMenu title={item.title} key={i} icon={item.icon}>
+              {item?.sub &&
+                item?.sub.map((sub, j) => (
+                  <MenuItem key={j}>{sub.title}</MenuItem>
+                ))}
+            </SubMenu>
+          ))}
+        </Menu>
+      </SidebarContent>
+      <SidebarFooter>eeee</SidebarFooter>
+    </ProSidebar>
   );
 }
