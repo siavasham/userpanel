@@ -4,7 +4,7 @@ export default createPersistedReducer("setting", localStorage);
 export const initialState = {
   token: "",
   name: "کاربر",
-  isLoged: false,
+  isLoged: true,
 };
 
 export function reducer(state, action) {

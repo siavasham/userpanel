@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { t } from "locales";
+import { useLocation, useHistory } from "react-router-dom";
 import useStorage from "reducer";
 import {
   ProSidebar,
@@ -17,7 +18,7 @@ import BarChartIcon from "@material-ui/icons/BarChart";
 import HistoryIcon from "@material-ui/icons/History";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
 const menu = [
   {
@@ -62,11 +63,35 @@ const menu = [
     title: t("tradeCrypto"),
     path: "/menu",
     icon: <CategoryIcon />,
+    sub: [
+      {
+        title: t("buyFromUs"),
+        path: "/menu",
+      },
+      {
+        title: t("sellToUs"),
+        path: "/menu",
+      },
+      {
+        title: t("livePrice"),
+        path: "/menu",
+      },
+    ],
   },
   {
     title: t("traderAi"),
     path: "/menu",
     icon: <BarChartIcon />,
+    sub: [
+      {
+        title: t("myTraderAccount"),
+        path: "/menu",
+      },
+      {
+        title: t("traderReport"),
+        path: "/menu",
+      },
+    ],
   },
   {
     title: t("transactionHistory"),
@@ -74,13 +99,14 @@ const menu = [
     icon: <HistoryIcon />,
   },
   {
-    title: t("inbox"),
-    path: "/menu",
+    title: t("myInbox"),
+    path: "/inbox",
     icon: <ChatBubbleOutlineIcon />,
   },
 ];
 
 export default function () {
+  const history = useHistory();
   const {
     setting: { name },
   } = useStorage();
@@ -88,12 +114,14 @@ export default function () {
   useEffect(() => {
     // setLoading(true);
   }, []);
-
+  const goTo = (path) => {
+    history.push(path);
+  };
   return (
-    <div className="right-sidebar">
+    <div className="left-sidebar">
       <ProSidebar rtl={true} collapsed={collapsed}>
         <div className="toggle left" onClick={() => setCollapsed(!collapsed)}>
-          <ArrowBackIosIcon className="toggle-icon" />
+          <ArrowForwardIosIcon className="toggle-icon" />
         </div>
         <SidebarHeader>
           <div className="profile">
@@ -110,11 +138,17 @@ export default function () {
                 <SubMenu title={item.title} key={i} icon={item.icon}>
                   {item?.sub &&
                     item?.sub.map((sub, j) => (
-                      <MenuItem key={j}>{sub.title}</MenuItem>
+                      <MenuItem key={j} onClick={() => goTo(sub.path)}>
+                        {sub.title}
+                      </MenuItem>
                     ))}
                 </SubMenu>
               ) : (
-                <MenuItem key={i} icon={item.icon}>
+                <MenuItem
+                  key={i}
+                  icon={item.icon}
+                  onClick={() => goTo(item.path)}
+                >
                   {item.title}
                 </MenuItem>
               )

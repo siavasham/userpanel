@@ -308,7 +308,7 @@
 .right-sidebar
   .pro-sidebar
   .pro-menu
-  .pro-sub-menu
+  .pro-menu-item
   > .pro-inner-item
   > .pro-icon-wrapper
   .pro-icon {
@@ -627,6 +627,15 @@
   padding-left: 0;
   padding-right: 0px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+.pro-sidebar.rtl.collapsed
+  .pro-menu
+  > ul
+  > .pro-menu-item.pro-sub-menu
+  > .pro-inner-list-item
+  > .popper-inner
+  ul {
+  border: 0;
 }
 
 .pro-sidebar.rtl.collapsed

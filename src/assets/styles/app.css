@@ -32,15 +32,78 @@ body {
   margin: 1rem 0;
   font-family: "iranyekan", Tahoma, sans-serif;
   font-size: 0.8rem;
+  color: #5c7eab;
 }
 #root {
   height: 100vh;
   display: flex;
   flex: 1;
 }
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0;
+}
 .page {
   background-color: #ebf8fc;
   display: flex;
   flex: 1;
   border-radius: 30px 30px 0 0;
+  padding: 1rem 2rem;
+}
+.page > div {
+  width: 100%;
+}
+
+* {
+  scrollbar-color: #555 #f5f5f5;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #555;
+}
+.dropdown-menu {
+  font-size: 0.8rem;
+}
+
+.fc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fbc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.msg-card {
+  border: 0;
+  box-shadow: 0 0 7px 0 rgba(82, 140, 164, 0.25);
+  border-radius: 0.7rem;
+}
+.text {
+  color: #1c293a;
+}
+.text-end {
+  text-align: end;
 }

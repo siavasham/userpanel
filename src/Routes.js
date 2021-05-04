@@ -10,12 +10,10 @@ import {
 import useStorage from "reducer";
 import Spinner from "component/spinner";
 
-// const Dashboard = lazy(() => import("route/dashboard/dashboard"));
+const Inbox = lazy(() => import("route/inbox/inbox"));
 
 const route = {
-  home: [
-    // { path: "/dashboard", component: Dashboard },
-  ],
+  home: [{ path: "/inbox", component: Inbox }],
   sign: [
     // { path: "/register", component: Register },
   ],
