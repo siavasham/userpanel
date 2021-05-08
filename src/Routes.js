@@ -10,12 +10,21 @@ import {
 import useStorage from "reducer";
 import Spinner from "component/spinner";
 
+const Login = lazy(() => import("route/login/login"));
+const Verify = lazy(() => import("route/login/verify"));
+const Info = lazy(() => import("route/user/info"));
+const Credit = lazy(() => import("route/user/credit"));
 const Inbox = lazy(() => import("route/inbox/inbox"));
 
 const route = {
-  home: [{ path: "/inbox", component: Inbox }],
+  home: [
+    { path: "/inbox", component: Inbox },
+    { path: "/info", component: Info },
+    { path: "/credit", component: Credit },
+  ],
   sign: [
-    // { path: "/register", component: Register },
+    { path: "/login", component: Login },
+    { path: "/verify", component: Verify },
   ],
 };
 const AppRoutes = (props) => {

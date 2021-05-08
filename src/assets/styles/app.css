@@ -1,5 +1,6 @@
 @import url("bootstrap.rtl.min.css");
 @import url("menu.css");
+@import url("bank.css");
 
 @font-face {
   font-family: iranyekan;
@@ -29,7 +30,7 @@
 body {
   height: 100vh;
   overflow: hidden;
-  margin: 1rem 0;
+  margin: 0;
   font-family: "iranyekan", Tahoma, sans-serif;
   font-size: 0.8rem;
   color: #5c7eab;
@@ -54,14 +55,18 @@ h6 {
   margin-bottom: 0;
 }
 .page {
-  background-color: #ebf8fc;
   display: flex;
   flex: 1;
-  border-radius: 30px 30px 0 0;
-  padding: 1rem 2rem;
+  padding-top: 1rem;
+  position: relative;
 }
+
 .page > div {
   width: 100%;
+  border-radius: 30px 30px 0 0;
+  background-color: #ebf8fc;
+  padding: 1rem 2rem;
+  overflow: auto;
 }
 
 * {
@@ -106,4 +111,82 @@ h6 {
 }
 .text-end {
   text-align: end;
+}
+.image-background {
+  background-size: cover;
+}
+.fullScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background-color: #ebf8fc;
+}
+.login {
+  width: 90%;
+  max-width: 800px;
+  background-color: #fff;
+  border-radius: 1rem;
+}
+.login h6 {
+  line-height: 1.5rem;
+}
+form label {
+  color: #1c293a;
+}
+.btn-red {
+  background: #ed572f;
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1rem;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  min-width: 200px;
+}
+
+.phone-number {
+  color: #ed572f;
+}
+
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 5.5rem);
+  position: fixed;
+  width: calc(100% - 4rem);
+  z-index: 9999;
+}
+@media (max-width: 991px) {
+  .spinner-wrapper {
+    width: 100%;
+  }
+}
+.spinner-wrapper .donut {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: 0.3rem solid rgba(0, 0, 0, 0.69);
+  border-top-color: #fbfbfb;
+  animation: 1.5s spin infinite linear;
+}
+.spinner-wrapper.for-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

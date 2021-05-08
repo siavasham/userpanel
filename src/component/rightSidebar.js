@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { t } from "locales";
-import useStorage from "reducer";
 import { useLocation, useHistory } from "react-router-dom";
+import useStorage from "reducer";
 import {
   ProSidebar,
   Menu,
@@ -11,52 +11,67 @@ import {
   SidebarContent,
   SidebarFooter,
 } from "react-pro-sidebar";
-import VerifiedUserOutlinedIcon from "@material-ui/icons/VerifiedUserOutlined";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import PersonIcon from "@material-ui/icons/Person";
+import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
+import CategoryIcon from "@material-ui/icons/Category";
+import BarChartIcon from "@material-ui/icons/BarChart";
+import HistoryIcon from "@material-ui/icons/History";
+import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
 const menu = [
   {
-    title: t("aboutConcordex"),
-    path: "/menu",
-    icon: <VerifiedUserOutlinedIcon />,
+    title: t("myProfile"),
+    icon: <PersonIcon />,
     sub: [
       {
-        title: t("aboutUs"),
-        path: "/menu",
+        title: t("myPrivateInfo"),
+        path: "/info",
       },
       {
-        title: t("service"),
-        path: "/menu",
+        title: t("levelUp"),
+        path: "/level",
       },
       {
-        title: t("contactUs"),
-        path: "/menu",
+        title: t("myCreditNumbers"),
+        path: "/credit",
+      },
+    ],
+  },
+  {
+    title: t("myWallet"),
+    icon: <AccountBalanceWalletIcon />,
+    sub: [
+      {
+        title: t("walletReport"),
+        path: "/transaction",
       },
       {
-        title: t("ruls"),
-        path: "/menu",
+        title: t("deposit"),
+        path: "/deposit",
       },
       {
-        title: t("privacy"),
-        path: "/menu",
+        title: t("withdraw"),
+        path: "/withdraw",
       },
     ],
   },
   {
     title: t("tradeCrypto"),
     path: "/menu",
-    icon: <VerifiedUserOutlinedIcon />,
+    icon: <CategoryIcon />,
     sub: [
       {
-        title: t("livePrices"),
+        title: t("buyFromUs"),
         path: "/menu",
       },
       {
-        title: t("priceCandle"),
+        title: t("sellToUs"),
         path: "/menu",
       },
       {
-        title: t("cryptoCalc"),
+        title: t("livePrice"),
         path: "/menu",
       },
     ],
@@ -64,71 +79,37 @@ const menu = [
   {
     title: t("traderAi"),
     path: "/menu",
-    icon: <VerifiedUserOutlinedIcon />,
+    icon: <BarChartIcon />,
     sub: [
       {
-        title: t("aboutTrader"),
+        title: t("myTraderAccount"),
         path: "/menu",
       },
       {
-        title: t("wallet"),
-        path: "/menu",
-      },
-      {
-        title: t("profitReport"),
+        title: t("traderReport"),
         path: "/menu",
       },
     ],
   },
   {
-    title: t("academy"),
+    title: t("transactionHistory"),
     path: "/menu",
-    icon: <VerifiedUserOutlinedIcon />,
-    sub: [
-      {
-        title: t("howToWork"),
-        path: "/menu",
-      },
-      {
-        title: t("mobileInfo"),
-        path: "/menu",
-      },
-      {
-        title: t("triningCourse"),
-        path: "/menu",
-      },
-    ],
+    icon: <HistoryIcon />,
   },
   {
-    title: t("services"),
-    path: "/menu",
-    icon: <VerifiedUserOutlinedIcon />,
-  },
-  {
-    title: t("support"),
-    path: "/menu",
-    icon: <VerifiedUserOutlinedIcon />,
-    sub: [
-      {
-        title: t("faq"),
-        path: "/menu",
-      },
-      {
-        title: t("liveSupport"),
-        path: "/menu",
-      },
-      {
-        title: t("ticket"),
-        path: "/menu",
-      },
-    ],
+    title: t("myInbox"),
+    path: "/inbox",
+    icon: <ChatBubbleOutlineIcon />,
   },
 ];
 
 export default function () {
   const history = useHistory();
-  const { setting } = useStorage();
-  const [collapsed, setCollapsed] = useState(true);
+  const location = useLocation();
+  const {
+    setting: { name },
+  } = useStorage();
+  const [collapsed, setCollapsed] = useState(false);
   useEffect(() => {
     // setLoading(true);
   }, []);
@@ -136,28 +117,36 @@ export default function () {
     history.push(path);
   };
   return (
-    <div className="right-sidebar">
+    <div className="left-sidebar">
       <ProSidebar rtl={true} collapsed={collapsed}>
-        <div className="toggle" onClick={() => setCollapsed(!collapsed)}>
-          <ArrowBackIosIcon className="toggle-icon" />
+        <div className="toggle left" onClick={() => setCollapsed(!collapsed)}>
+          <ArrowForwardIosIcon className="toggle-icon" />
         </div>
         <SidebarHeader>
-          <div className="brand">
-            <div className="brand-logo"></div>
-            <div className="brand-text">
-              {t("brand")}
-              <div className="brand-sub-text">{t("safe")}</div>
+          <div className="profile">
+            <div className="icon">
+              <PersonOutlineIcon className="profile-icon" />
             </div>
+            <div className="profile-text">{name}</div>
           </div>
         </SidebarHeader>
         <SidebarContent>
           <Menu iconShape="square">
             {menu.map((item, i) =>
               item?.sub ? (
-                <SubMenu title={item.title} key={i} icon={item.icon}>
+                <SubMenu
+                  title={item.title}
+                  key={i}
+                  icon={item.icon}
+                  open={item?.sub?.find((e) => e.path == location.pathname)}
+                >
                   {item?.sub &&
                     item?.sub.map((sub, j) => (
-                      <MenuItem key={j} onClick={() => goTo(sub.path)}>
+                      <MenuItem
+                        key={j}
+                        onClick={() => goTo(sub.path)}
+                        active={location.pathname == sub.path}
+                      >
                         {sub.title}
                       </MenuItem>
                     ))}
@@ -167,6 +156,7 @@ export default function () {
                   key={i}
                   icon={item.icon}
                   onClick={() => goTo(item.path)}
+                  active={location.pathname == item.path}
                 >
                   {item.title}
                 </MenuItem>

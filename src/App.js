@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import { withRouter, useLocation } from "react-router-dom";
 import "assets/styles/app.css";
 import AppRoutes from "Routes";
-import LeftSidebar from "component/leftSidebar";
 import RightSidebar from "component/rightSidebar";
+import LeftSidebar from "component/leftSidebar";
 import useStorage from "reducer";
 
 const App = (props) => {
   const { setSetting } = useStorage();
-  const [state, setState] = useState({});
+  const [fullScreen, setFullscreen] = useState(true);
   const location = useLocation();
+
   useEffect(() => {
     const body = document.querySelector("body");
     body.classList.add("rtl");
@@ -22,17 +23,19 @@ const App = (props) => {
     });
     window.scrollTo(0, 0);
   }, []);
+
   useEffect(() => {
-    const fullPageLayoutRoutes = ["/login"];
+    const fullPageLayoutRoutes = ["/login", "/verify"];
+    setFullscreen(fullPageLayoutRoutes.includes(location.pathname));
   }, [location]);
 
   return (
     <>
-      <LeftSidebar />
-      <div className="page">
+      {!fullScreen && <RightSidebar />}
+      <div className={fullScreen ? "fullScreen" : "page"}>
         <AppRoutes />
       </div>
-      <RightSidebar />
+      {!fullScreen && <LeftSidebar />}
     </>
   );
 };
