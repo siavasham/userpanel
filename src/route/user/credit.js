@@ -6,13 +6,15 @@ import Button from "component/button";
 import Input from "component/input";
 import Spinner from "component/spinner";
 import { banks } from "library/const";
+import Alert from "react-bootstrap/Alert";
+import _ from "lodash";
 
 export default function () {
   const [loading, setLoading] = useState(false);
   const [submiting, setSubmiting] = useState(false);
   const [error, setError] = useState(false);
-  const [bank, setBank] = useState("");
-  const [data, setData] = useState();
+  const [data, setData] = useState({ code: "", number: "", iban: "" });
+  const [list, setList] = useState([]);
 
   const onChange = (name, value) => {
     setData({ ...data, [name]: value });
@@ -22,57 +24,93 @@ export default function () {
   } = useStorage();
 
   useEffect(() => {
-    // setLoading(true);
-    // post("profile", { token }).then((data) => {
-    //   setLoading(false);
-    //   if (data.success) {
-    //     setData(data.success);
-    //   }
-    // });
+    setLoading(true);
+    post("credit-list", { token }).then((data) => {
+      setLoading(false);
+      if (data.success) {
+        setList(data.success);
+      }
+    });
   }, []);
+  const validate = () => {
+    const temp = {};
+    console.log(data);
+    for (let i in data) {
+      if (data[i] == "") temp[i] = "validation.empty";
+    }
+    const res = _.isEmpty(temp) ? null : temp;
+    setError(res);
+    return res;
+  };
   const onSubmit = (e) => {
     e.preventDefault();
-    setSubmiting(true);
-    post("update-info", { ...data, token }).then((data) => {
-      setSubmiting(null);
+    if (validate() == null) {
+      setSubmiting(true);
+      post("credit-add", { ...data, token }).then((data) => {
+        setSubmiting(null);
+        refresh();
+      });
+    }
+  };
+  const refresh = () => {
+    post("credit-list", { token }).then((data) => {
+      if (data.success) {
+        setList(data.success);
+      }
     });
   };
   return (
     <div className="p-4">
       {loading && <Spinner forDiv />}
+      <h6 className="pb-4">{t("newCredit")}</h6>
       <div className="row">
-        <div className="col-5">
-          <h6 className="pb-1">{t("newCredit")}</h6>
-          <form className="mt-5 m-4" autoComplete="off" onSubmit={onSubmit}>
-            <Input
-              name={"credit"}
-              value={data?.credit}
-              onChange={(v) => onChange("credit", v)}
-            />
-            <Input
-              name={"iban"}
-              value={data?.iban}
-              onChange={(v) => onChange("iban", v)}
-            />
-            <div className="d-grid gap-2 mt-5">
-              <Button className="btn btn-danger btn-red" loading={loading}>
-                {t("submitCredit")}
-              </Button>
-            </div>
-          </form>
-        </div>
-
-        <div className="col-7 banks">
+        <div className="col-sm-12 col-md-7 mb-5 banks">
           {banks.map((item, i) => (
             <div
-              className={"bank-item " + (bank == item ? "active" : "")}
+              className={"bank-item " + (data?.code == item ? "active" : "")}
               key={i}
-              onClick={() => setBank(item)}
+              onClick={() => onChange("code", item)}
             >
               <i className={"ibl128 ibl-" + item}></i>
             </div>
           ))}
         </div>
+        <div className="col-sm-12 col-md-5  mb-5">
+          <form className="mt-3 m-1" autoComplete="off" onSubmit={onSubmit}>
+            <Input
+              name={"credit"}
+              value={data?.number}
+              onChange={(v) => onChange("number", v)}
+              error={error?.number}
+            />
+            <Input
+              name={"iban"}
+              value={data?.iban}
+              onChange={(v) => onChange("iban", v)}
+              error={error?.iban}
+            />
+            <Alert variant="danger" show={!!error?.code}>
+              {t("bankNotSelected")}
+            </Alert>
+            <div className="d-grid gap-2 mt-5">
+              <Button className="btn btn-danger btn-red" loading={submiting}>
+                {t("submitCredit")}
+              </Button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <hr></hr>
+      <div className="row row-cols-1 row-cols-md-3 row-cols-ld-4 g-4 mt-5">
+        {list.map((item, i) => (
+          <div className="col" key={i}>
+            <div className="card my-card fc p-3">
+              <i className={"ibl128 ibl-" + item.code}></i>
+              <div className="text-start text w-100">{t("credit")}</div>
+              <h6 className="">{item.number}</h6>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

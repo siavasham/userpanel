@@ -13,7 +13,7 @@ export default function ({
   ...rest
 }) {
   return (
-    <div className={"form-group " + (error ? "has-danger" : "")}>
+    <div className={"form-group mb-3 "}>
       <label htmlFor={name}>{t(name)}</label>
       {data ? (
         <select
@@ -22,8 +22,7 @@ export default function ({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className={
-            "form-control form-control-lg " +
-            (error ? "form-control-danger" : "")
+            "form-control form-control-lg " + (error ? "is-invalid" : "")
           }
           {...rest}
         >
@@ -44,8 +43,7 @@ export default function ({
           autoComplete="off"
           dir="auto"
           className={
-            "form-control form-control-lg " +
-            (error ? "form-control-danger" : "")
+            "form-control form-control-lg " + (error ? "is-invalid" : "")
           }
           {...rest}
         />
@@ -57,16 +55,15 @@ export default function ({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className={
-            "form-control form-control-lg " +
-            (error ? "form-control-danger" : "")
+            "form-control form-control-lg " + (error ? "is-invalid" : "")
           }
           rows={5}
           {...rest}
         />
       )}
-      <label className="error mt-2 text-danger">
+      <div class="invalid-feedback text-end my-2">
         {typeof error == "object" ? error.map((e) => t(e) + " ") : t(error)}
-      </label>
+      </div>
       {"info" in rest && (
         <label className="info mt-2 text-info w-100">{rest.info}</label>
       )}

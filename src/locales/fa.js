@@ -77,4 +77,6 @@ export default {
   credit: "شماره حساب",
   submitCredit: "ثبت حساب بانکی",
   newCredit: "ثبت حساب بانکی جدید",
+  "validation.empty": " این فیلد را پر کنید",
+  bankNotSelected: "بانک مورد نظر انتخاب نشده است",
 };
