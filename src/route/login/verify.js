@@ -43,7 +43,7 @@ export default function () {
           <form className="m-4" autoComplete="off" onSubmit={onSubmit}>
             <div className="mb-3">
               <label className="form-label">{t("phoneNumber")}</label>
-              <div className="fbc">
+              <div className="f ac jb">
                 <h3 className="phone-number">{session?.phone}</h3>
                 <Link to="/login" className="phone-number">
                   {t("edit")}

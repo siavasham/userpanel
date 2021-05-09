@@ -24,7 +24,7 @@ export default {
   withdraw: "درخواست تسویه",
   buyFromUs: "خرید ارز دیجیتال از ما",
   sellToUs: "فروش ارز دیجیتال به ما",
-  livePrice: "پنل قیمت لحظه‌ای ارز دیجیتال",
+  livePrice: "قیمت لحظه‌ای ارز دیجیتال",
   myTraderAccount: "حساب تریدر هوشمند من",
   traderReport: "گزارش جامع وضعیت سودآوری",
   aboutUs: "درباره ما",
@@ -79,4 +79,6 @@ export default {
   newCredit: "ثبت حساب بانکی جدید",
   "validation.empty": " این فیلد را پر کنید",
   bankNotSelected: "بانک مورد نظر انتخاب نشده است",
+  toTrader: "انتقال به تریدر",
+  balance: "موجودی",
 };

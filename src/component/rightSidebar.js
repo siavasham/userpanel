@@ -42,20 +42,7 @@ const menu = [
   {
     title: t("myWallet"),
     icon: <AccountBalanceWalletIcon />,
-    sub: [
-      {
-        title: t("walletReport"),
-        path: "/transaction",
-      },
-      {
-        title: t("deposit"),
-        path: "/deposit",
-      },
-      {
-        title: t("withdraw"),
-        path: "/withdraw",
-      },
-    ],
+    path: "/wallet",
   },
   {
     title: t("tradeCrypto"),

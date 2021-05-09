@@ -1,0 +1,116 @@
+@font-face {
+  font-family: iranyekan;
+  font-style: normal;
+  font-weight: bold;
+  src: url("../fonts/eot/iranyekanwebboldfanum.eot");
+  src: url("../fonts/eot/iranyekanwebboldfanum.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-8 */ url("../fonts/woff/iranyekanwebboldfanum.woff") format("woff"),
+    /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+      url("../fonts/ttf/iranyekanwebboldfanum.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: iranyekan;
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/eot/iranyekanwebregularfanum.eot");
+  src: url("../fonts/eot/iranyekanwebregularfanum.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-8 */ url("../fonts/woff/iranyekanwebregularfanum.woff")
+      format("woff"),
+    /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+      url("../fonts/ttf/iranyekanwebregularfanum.ttf") format("truetype");
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  font-family: "iranyekan", Tahoma, sans-serif;
+  font-size: 0.8rem;
+  color: #5c7eab;
+}
+#root {
+  height: 100vh;
+  display: flex;
+  flex: 1;
+}
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0;
+}
+* {
+  scrollbar-color: #555 #f5f5f5;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #555;
+}
+.dropdown-menu {
+  font-size: 0.8rem;
+}
+.text-end {
+  text-align: end;
+}
+.text-start {
+  text-align: start;
+}
+.image-background {
+  background-size: cover;
+}
+figure {
+  margin: 0;
+}
+.blockquote-footer::before {
+  content: " ";
+}
+.blockquote-footer {
+  margin-bottom: 0;
+}
+
+.f {
+  display: flex;
+}
+.fc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.f.jb {
+  justify-content: space-between;
+}
+.f.js {
+  justify-content: flex-start;
+}
+.f.je {
+  justify-content: flex-end;
+}
+
+.f.ac {
+  align-items: center;
+}
+.fdc {
+  display: flex;
+  flex-direction: column;
+}

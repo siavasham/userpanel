@@ -48,13 +48,13 @@ export default function () {
         <div className="col">
           <div className="card msg-card">
             <div className="card-body">
-              <div className="fbc mb-2">
+              <div className="f jb ac mb-2">
                 <div>{t("refId")}</div>
                 <div>
                   {t("date")}:<span className="text">1400/02/15</span>
                 </div>
               </div>
-              <div className="fbc mb-4">
+              <div className="f jb ac mb-4">
                 <h5 className="text">3232323</h5>
                 <div>
                   {t("time")}: <span className="text">15:35</span>
@@ -71,13 +71,13 @@ export default function () {
         <div className="col">
           <div className="card msg-card">
             <div className="card-body">
-              <div className="fbc mb-2">
+              <div className="f jb ac mb-2">
                 <div>{t("refId")}</div>
                 <div>
                   {t("date")}:<span className="text">1400/02/15</span>
                 </div>
               </div>
-              <div className="fbc mb-4">
+              <div className="f jb ac mb-4">
                 <h5 className="text">3232323</h5>
                 <div>
                   {t("time")}: <span className="text">15:35</span>
@@ -94,13 +94,13 @@ export default function () {
         <div className="col">
           <div className="card msg-card">
             <div className="card-body">
-              <div className="fbc mb-2">
+              <div className="f jb ac mb-2">
                 <div>{t("refId")}</div>
                 <div>
                   {t("date")}:<span className="text">1400/02/15</span>
                 </div>
               </div>
-              <div className="fbc mb-4">
+              <div className="f jb ac mb-4">
                 <h5 className="text">3232323</h5>
                 <div>
                   {t("time")}: <span className="text">15:35</span>

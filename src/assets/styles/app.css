@@ -1,59 +1,10 @@
 @import url("bootstrap.rtl.min.css");
 @import url("menu.css");
 @import url("bank.css");
+@import url("icons.css");
+@import url("spiner.css");
+@import url("reset.css");
 
-@font-face {
-  font-family: iranyekan;
-  font-style: normal;
-  font-weight: bold;
-  src: url("../fonts/eot/iranyekanwebboldfanum.eot");
-  src: url("../fonts/eot/iranyekanwebboldfanum.eot?#iefix")
-      format("embedded-opentype"),
-    /* IE6-8 */ url("../fonts/woff/iranyekanwebboldfanum.woff") format("woff"),
-    /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-      url("../fonts/ttf/iranyekanwebboldfanum.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: iranyekan;
-  font-style: normal;
-  font-weight: normal;
-  src: url("../fonts/eot/iranyekanwebregularfanum.eot");
-  src: url("../fonts/eot/iranyekanwebregularfanum.eot?#iefix")
-      format("embedded-opentype"),
-    /* IE6-8 */ url("../fonts/woff/iranyekanwebregularfanum.woff")
-      format("woff"),
-    /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-      url("../fonts/ttf/iranyekanwebregularfanum.ttf") format("truetype");
-}
-
-body {
-  height: 100vh;
-  overflow: hidden;
-  margin: 0;
-  font-family: "iranyekan", Tahoma, sans-serif;
-  font-size: 0.8rem;
-  color: #5c7eab;
-}
-#root {
-  height: 100vh;
-  display: flex;
-  flex: 1;
-}
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-bottom: 0;
-}
 .page {
   display: flex;
   flex: 1;
@@ -69,55 +20,17 @@ h6 {
   overflow: auto;
 }
 
-* {
-  scrollbar-color: #555 #f5f5f5;
-  scrollbar-width: thin;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #f5f5f5;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-  background-color: #f5f5f5;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #555;
-}
-.dropdown-menu {
-  font-size: 0.8rem;
-}
-
-.fc {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.fbc {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .my-card {
   border: 0;
-  box-shadow: 0 0 7px 0 rgba(82, 140, 164, 0.25);
+  box-shadow: 5px 5px 10px rgba(190, 190, 190, 32%),
+    -5px -5px 10px rgba(255, 255, 255, 0.5);
   border-radius: 0.7rem;
+  background: rgba(255, 255, 255, 85%);
 }
 .text {
   color: #1c293a;
 }
-.text-end {
-  text-align: end;
-}
-.text-start {
-  text-align: start;
-}
-.image-background {
-  background-size: cover;
-}
+
 .fullScreen {
   display: flex;
   justify-content: center;
@@ -148,48 +61,14 @@ form label {
   display: flex;
   justify-content: center;
   align-content: center;
-  min-width: 200px;
+  font-size: 0.8rem;
 }
 
 .phone-number {
   color: #ed572f;
 }
 
-.spinner-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 5.5rem);
-  position: absolute;
-  width: calc(100% - 4rem);
-  z-index: 9999;
-}
-@media (max-width: 991px) {
-  .spinner-wrapper {
-    width: 100%;
-  }
-}
-.spinner-wrapper .donut {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-  border: 0.3rem solid rgba(0, 0, 0, 0.69);
-  border-top-color: #fbfbfb;
-  animation: 1.5s spin infinite linear;
-}
-.spinner-wrapper.for-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  position: absolute;
-  width: 100%;
-  top: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.5);
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+.my-modal {
+  min-height: 200px;
+  position: relative;
 }

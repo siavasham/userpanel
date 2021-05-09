@@ -64,7 +64,7 @@ export default function () {
       {loading && <Spinner forDiv />}
       <h6 className="pb-4">{t("newCredit")}</h6>
       <div className="row">
-        <div className="col-sm-12 col-md-7 mb-5 banks">
+        <div className="col-sm-12 col-md-7 mb-4 banks">
           {banks.map((item, i) => (
             <div
               className={"bank-item " + (data?.code == item ? "active" : "")}
@@ -75,7 +75,7 @@ export default function () {
             </div>
           ))}
         </div>
-        <div className="col-sm-12 col-md-5  mb-5">
+        <div className="col-sm-12 col-md-4  mb-5">
           <form className="mt-3 m-1" autoComplete="off" onSubmit={onSubmit}>
             <Input
               name={"credit"}
@@ -101,7 +101,7 @@ export default function () {
         </div>
       </div>
       <hr></hr>
-      <div className="row row-cols-1 row-cols-md-3 row-cols-ld-4 g-4 mt-5">
+      <div className="row row-cols-1 row-cols-md-3 row-cols-ld-4 g-4 mt-4">
         {list.map((item, i) => (
           <div className="col" key={i}>
             <div className="card my-card fc p-3">

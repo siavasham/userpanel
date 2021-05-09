@@ -12,15 +12,19 @@ import Spinner from "component/spinner";
 
 const Login = lazy(() => import("route/login/login"));
 const Verify = lazy(() => import("route/login/verify"));
+const Dashboard = lazy(() => import("route/dashboard/dashboard"));
 const Info = lazy(() => import("route/user/info"));
 const Credit = lazy(() => import("route/user/credit"));
+const Wallet = lazy(() => import("route/wallet/wallet"));
 const Inbox = lazy(() => import("route/inbox/inbox"));
 
 const route = {
   home: [
+    { path: "/dashboard", component: Dashboard },
     { path: "/inbox", component: Inbox },
     { path: "/info", component: Info },
     { path: "/credit", component: Credit },
+    { path: "/wallet", component: Wallet },
   ],
   sign: [
     { path: "/login", component: Login },

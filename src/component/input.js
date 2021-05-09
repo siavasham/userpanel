@@ -21,9 +21,7 @@ export default function ({
           name={name}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={
-            "form-control form-control-lg " + (error ? "is-invalid" : "")
-          }
+          className={"form-control  " + (error ? "is-invalid" : "")}
           {...rest}
         >
           {data.map((d, i) => (
@@ -42,9 +40,7 @@ export default function ({
           onChange={(e) => onChange(e.target.value)}
           autoComplete="off"
           dir="auto"
-          className={
-            "form-control form-control-lg " + (error ? "is-invalid" : "")
-          }
+          className={"form-control " + (error ? "is-invalid" : "")}
           {...rest}
         />
       ) : (
@@ -54,14 +50,12 @@ export default function ({
           dir="auto"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={
-            "form-control form-control-lg " + (error ? "is-invalid" : "")
-          }
+          className={"form-control " + (error ? "is-invalid" : "")}
           rows={5}
           {...rest}
         />
       )}
-      <div class="invalid-feedback text-end my-2">
+      <div className="invalid-feedback text-end my-2">
         {typeof error == "object" ? error.map((e) => t(e) + " ") : t(error)}
       </div>
       {"info" in rest && (
