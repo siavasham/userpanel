@@ -58,7 +58,9 @@ export default function () {
     }
     setError(false);
     setSubmiting(true);
-    post("kyc", { token, id: idCard, img: fullImage }, { file: true }).then(
+    setHasError(false);
+    setSuccess(false);
+    post("kyc", { token, cart: idCard, img: fullImage }, { file: true }).then(
       (data) => {
         setSubmiting(null);
         if (data.success) {
@@ -72,7 +74,6 @@ export default function () {
   return (
     <div className="p-4">
       {loading && <Spinner forDiv />}
-
       <div className="row">
         <div className="col-sm-12 col-md-6">
           <div className="alert alert-primary m0 f" role="alert">
@@ -87,73 +88,92 @@ export default function () {
           </div>
         </div>
       </div>
-      <hr className="mt-5 mb-3"></hr>
-      <div className="f ac">
-        <img className="img-icon" src={verfyLogo} />
-        <p className="m0">{t("kycText")}</p>
-      </div>
-      <div className="row m-4">
-        <div className="col-sm-12 col-md-6">
-          <div className="card">
-            <label className="verify-img-bg fc">
-              {idCard ? (
-                <>
-                  <img
-                    className="verify-img-temp"
-                    src={URL.createObjectURL(idCard)}
-                  />
-                </>
-              ) : (
-                <WallpaperIcon className="verify-img-icon" />
-              )}
-              <input type="file" onChange={onChangeId} />
-            </label>
-            <div className="card-body verify-text">
-              <p className="card-text">{t("upImg1")}</p>
+      {data == null ? (
+        <>
+          <hr className="mt-5 mb-3"></hr>
+          <div className="f ac">
+            <img className="img-icon" src={verfyLogo} />
+            <p className="m0">{t("kycText")}</p>
+          </div>
+          <div className="row m-4">
+            <div className="col-sm-12 col-md-6">
+              <div className="card">
+                <label className="verify-img-bg fc">
+                  {idCard ? (
+                    <>
+                      <img
+                        className="verify-img-temp"
+                        src={URL.createObjectURL(idCard)}
+                      />
+                    </>
+                  ) : (
+                    <WallpaperIcon className="verify-img-icon" />
+                  )}
+                  <input type="file" onChange={onChangeId} />
+                </label>
+                <div className="card-body verify-text">
+                  <p className="card-text">{t("upImg1")}</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-sm-12 col-md-6">
+              <div className="card">
+                <label className="verify-img-bg fc">
+                  {fullImage ? (
+                    <>
+                      <img
+                        className="verify-img-temp"
+                        src={URL.createObjectURL(fullImage)}
+                      />
+                    </>
+                  ) : (
+                    <WallpaperIcon className="verify-img-icon" />
+                  )}
+                  <input type="file" onChange={onChangeFull} />
+                </label>
+                <div className="card-body verify-text">
+                  <p className="card-text">{t("upImg2")}</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="col-sm-12 col-md-6">
-          <div className="card">
-            <label className="verify-img-bg fc">
-              {fullImage ? (
-                <>
-                  <img
-                    className="verify-img-temp"
-                    src={URL.createObjectURL(fullImage)}
-                  />
-                </>
-              ) : (
-                <WallpaperIcon className="verify-img-icon" />
-              )}
-              <input type="file" onChange={onChangeFull} />
-            </label>
-            <div className="card-body verify-text">
-              <p className="card-text">{t("upImg2")}</p>
-            </div>
+          <div className="mx-4">
+            <Alert variant="warning mt-4" show={error}>
+              {t("imageNotPicked")}
+            </Alert>
+            <Alert variant="danger" show={hasError}>
+              {t("errorVerify")}
+            </Alert>
+            <Alert variant="success" show={success}>
+              {t("successVerify")}
+            </Alert>
           </div>
+          <div className="mt-4 fc">
+            <Button
+              loading={submiting}
+              className="btn btn-danger btn-red w-50"
+              onClick={onSubmit}
+            >
+              {t("submitVerify")}
+            </Button>
+          </div>
+        </>
+      ) : (
+        <div className="m-1 mt-5">
+          <Alert
+            variant={
+              data.status == "pending"
+                ? "warning"
+                : data.status == "rejected"
+                ? "danger"
+                : "success"
+            }
+            show={true}
+          >
+            {t(data.status + "Verify")}
+          </Alert>
         </div>
-      </div>
-      <div className="mx-4">
-        <Alert variant="warning mt-4" show={error}>
-          {t("imageNotPicked")}
-        </Alert>
-        <Alert variant="danger" show={hasError}>
-          {t("errorVerify")}
-        </Alert>
-        <Alert variant="success" show={success}>
-          {t("successVerify")}
-        </Alert>
-      </div>
-      <div className="mt-4 fc">
-        <Button
-          loading={submiting}
-          className="btn btn-danger btn-red w-50"
-          onClick={onSubmit}
-        >
-          {t("submitVerify")}
-        </Button>
-      </div>
+      )}
     </div>
   );
 }

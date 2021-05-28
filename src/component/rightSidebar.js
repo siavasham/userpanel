@@ -153,7 +153,7 @@ export default function () {
             )}
           </Menu>
         </SidebarContent>
-        <SidebarFooter>eeee</SidebarFooter>
+        <SidebarFooter></SidebarFooter>
       </ProSidebar>
     </div>
   );

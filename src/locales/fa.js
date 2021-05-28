@@ -139,4 +139,7 @@ export default {
   imageNotPicked: "هر ۲ تا تصویر باید انتخاب شده باشد",
   successVerify: "آپلود تصاویر  با موفقیت انجام شد",
   errorVerify: "مشکلی در فرایند آپلود تصاویر به وجود آمده است",
+  pendingVerify: "احراز هویت شما در حال بررسی می باشد",
+  rejectedVerify: "احراز هویت شما رد شد",
+  acceptedVerify: "احراز هویت شما تکمیل شده است",
 };

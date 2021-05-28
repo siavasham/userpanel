@@ -106,3 +106,7 @@ form label {
 .verify-text {
   height: 80px;
 }
+.live-chart article {
+  height: auto !important;
+  flex: 1;
+}
