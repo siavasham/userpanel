@@ -85,3 +85,24 @@ form label {
 .qr-code svg {
   border-radius: 0.5rem;
 }
+.img-icon {
+  height: 30px;
+  margin: 0 10px;
+}
+.verify-img-bg {
+  background: #d8d8d8;
+  height: 200px;
+  border-bottom: 1px solid #d8d8d8;
+}
+.verify-img-icon {
+  font-size: 2rem;
+  font-size: 5rem !important;
+  color: #808080;
+}
+.verify-img-temp {
+  height: 100%;
+  width: auto;
+}
+.verify-text {
+  height: 80px;
+}

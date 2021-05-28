@@ -14,9 +14,10 @@ const Login = lazy(() => import("route/login/login"));
 const Verify = lazy(() => import("route/login/verify"));
 const Dashboard = lazy(() => import("route/dashboard/dashboard"));
 const Info = lazy(() => import("route/user/info"));
+const Level = lazy(() => import("route/user/level"));
 const Credit = lazy(() => import("route/user/credit"));
 const Wallet = lazy(() => import("route/wallet/wallet"));
-const Buy = lazy(() => import("route/trade/buy"));
+const Buy = lazy(() => import("route/trade/dex"));
 const Inbox = lazy(() => import("route/inbox/inbox"));
 
 const route = {
@@ -24,9 +25,10 @@ const route = {
     { path: "/dashboard", component: Dashboard },
     { path: "/inbox", component: Inbox },
     { path: "/info", component: Info },
+    { path: "/level", component: Level },
     { path: "/credit", component: Credit },
     { path: "/wallet", component: Wallet },
-    { path: "/buy", component: Buy },
+    { path: "/dex", component: Buy },
   ],
   sign: [
     { path: "/login", component: Login },

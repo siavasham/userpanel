@@ -91,7 +91,9 @@ figure {
 .blockquote-footer {
   margin-bottom: 0;
 }
-
+.fw {
+  flex-wrap: wrap;
+}
 .f {
   display: flex;
 }
@@ -154,4 +156,10 @@ figure {
 .sticky-top {
   position: sticky;
   top: 0;
+}
+.m0 {
+  margin: 0;
+}
+input[type="file"] {
+  display: none;
 }

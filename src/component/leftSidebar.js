@@ -127,15 +127,15 @@ const menu = [
 ];
 
 export default function () {
-  const [width, height] = useWindowSize();
+  // const [width, height] = useWindowSize();
   const history = useHistory();
   const location = useLocation();
 
   const { setting } = useStorage();
   const [collapsed, setCollapsed] = useState(true);
-  useEffect(() => {
-    setCollapsed(width < 900);
-  }, [width]);
+  // useEffect(() => {
+  //   setCollapsed(width < 900);
+  // }, [width]);
   const goTo = (path) => {
     history.push(path);
   };

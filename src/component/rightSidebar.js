@@ -51,12 +51,12 @@ const menu = [
     icon: <CategoryIcon />,
     sub: [
       {
-        title: t("buyFromUs"),
-        path: "/buy",
+        title: t("dexUs"),
+        path: "/dex",
       },
       {
-        title: t("sellToUs"),
-        path: "/sell",
+        title: t("dexUser"),
+        path: "/user-dex",
       },
       {
         title: t("livePrice"),

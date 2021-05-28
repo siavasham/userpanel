@@ -1,5 +1,6 @@
 import axios from "axios";
 import { setup } from "axios-cache-adapter";
+import { serialize } from "./object2formdata";
 export const baseUrl =
   window.location.hostname === "localhost"
     ? "http://localhost:8000/api/"
@@ -41,10 +42,12 @@ export const post = async (path, items, opt) => {
         maxAge: 10 * 60 * 1000,
       };
     }
-    let form = new FormData();
-    for (let key in items) {
-      form.append(key, items[key]);
+    if (opt?.file) {
+      header.headers = {
+        "Content-Type": "multipart/form-data;",
+      };
     }
+    const form = serialize(items);
     const res = axiosBase.post(path, form, header);
     const { data } = await res;
     if (data?.login) {

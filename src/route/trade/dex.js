@@ -7,7 +7,7 @@ import Button from "component/button";
 import Alert from "react-bootstrap/Alert";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-import { toMoney } from "library/helper";
+import { toMoney, isFloat } from "library/helper";
 import Input from "component/input";
 import isEmpty from "lodash/isEmpty";
 import Coins from "component/coins";
@@ -26,8 +26,9 @@ export default function (props) {
   const [wizard, setWizard] = useState("source");
   const [sourceCoin, setSourceCoin] = useState({});
   const [destCoin, setDestCoin] = useState({});
+  const [final, setFinal] = useState("");
   const [data, setData] = useState({
-    amount: "0",
+    amount: "",
   });
   useEffect(() => {
     setLoading(true);
@@ -47,10 +48,12 @@ export default function (props) {
 
   const sourceCoinSelected = (coin) => {
     setWizard("dest");
+    setData({ amount: "" });
     setSourceCoin(coin);
   };
   const destCoinSelected = (coin) => {
     setWizard("final");
+    setData({ amount: "" });
     setDestCoin(coin);
   };
   const onChange = (name, value) => {
@@ -68,6 +71,19 @@ export default function (props) {
     setError(res);
     return res;
   };
+  useEffect(() => {
+    if (data.amount > 0) {
+      let rial = 1 / currency.price;
+      let sprice = sourceCoin.name == "IR" ? rial : sourceCoin.price;
+      let dprice = destCoin.name == "IR" ? rial : destCoin.price;
+      let usdt = data.amount * sprice;
+      let xfinal = exactMath.div(usdt, dprice);
+      xfinal = isFloat(xfinal) ? exactMath.floor(xfinal, -4) : xfinal;
+      setFinal(xfinal);
+    } else {
+      setFinal("");
+    }
+  }, [data.amount]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -75,6 +91,7 @@ export default function (props) {
       setWizard("final");
     }
   };
+  let balace = wallet?.[sourceCoin?.name]?.balance;
   return (
     <div className="p-2">
       {loading && <Spinner forDiv />}
@@ -125,47 +142,35 @@ export default function (props) {
                   <Coins coins={[destCoin]} currency={currency} />
                 </div>
               </div>
-              <div className="row">
+              <div className="row mt-2">
                 <div className="col-sm-12 col-md-6 mb-4">
-                  <div className="my-3">
-                    <Input
-                      name={"buyAmount"}
-                      value={data?.amount}
-                      onChange={(v) => onChange("amount", v)}
-                      error={error?.amount}
-                      info={
-                        <div
-                          className="d-flex justify-content-between cursor-pointer"
-                          onClick={() =>
-                            onChange(
-                              "amount",
-                              wallet?.[sourceCoin?.name]?.balance
-                            )
-                          }
-                        >
-                          <span>{t("withdrawable")}</span>
-                          <span>{wallet?.[sourceCoin?.name]?.balance}</span>
-                        </div>
-                      }
-                    />
-                  </div>
-                  <div className="mt-2 f ac">
-                    {t("payAmount")}
-                    <span className="mx-3 fs-4 text-success">
-                      {toMoney(
-                        exactMath.mul(
-                          parseFloat(data?.amount) || 0,
-                          currency?.sell
-                        )
-                      )}
-                    </span>
-                    {t("irr")}
-                  </div>
+                  <Input
+                    name={"buyAmount"}
+                    value={data?.amount}
+                    onChange={(v) => onChange("amount", v)}
+                    error={error?.amount}
+                    info={
+                      <div
+                        className="d-flex justify-content-between cursor-pointer"
+                        onClick={() => onChange("amount", balace)}
+                      >
+                        <span>{t("balance")}</span>
+                        <span>{toMoney(balace)}</span>
+                      </div>
+                    }
+                  />
+                </div>
+                <div className="col-sm-12 col-md-6 mb-4 f ac">
+                  <h6>{t("dexAmount")}</h6>
+                  <span className="mx-3 fs-4 text-success">
+                    {toMoney(final)}
+                  </span>
+                  <h6>{t(destCoin.name)}</h6>
                 </div>
               </div>
               <div className="mt-4 fc">
                 <Button className="btn btn-danger btn-red w-50">
-                  {t("confirmAndContine")}
+                  {t("confirmTrade")}
                 </Button>
               </div>
             </form>
