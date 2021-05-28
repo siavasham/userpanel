@@ -11,6 +11,7 @@ import {
   SidebarContent,
   SidebarFooter,
 } from "react-pro-sidebar";
+import useWindowSize from "component/resize";
 import VerifiedUserOutlinedIcon from "@material-ui/icons/VerifiedUserOutlined";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
@@ -126,14 +127,15 @@ const menu = [
 ];
 
 export default function () {
+  const [width, height] = useWindowSize();
   const history = useHistory();
   const location = useLocation();
 
   const { setting } = useStorage();
   const [collapsed, setCollapsed] = useState(true);
   useEffect(() => {
-    // setLoading(true);
-  }, []);
+    setCollapsed(width < 900);
+  }, [width]);
   const goTo = (path) => {
     history.push(path);
   };

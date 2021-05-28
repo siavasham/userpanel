@@ -72,3 +72,16 @@ form label {
   min-height: 200px;
   position: relative;
 }
+
+.inline-absolute {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  left: 0;
+}
+.inline-absolute.center {
+  top: 40%;
+}
+.qr-code svg {
+  border-radius: 0.5rem;
+}

@@ -11,6 +11,7 @@ import {
   SidebarContent,
   SidebarFooter,
 } from "react-pro-sidebar";
+import useWindowSize from "component/resize";
 import PersonIcon from "@material-ui/icons/Person";
 import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
 import CategoryIcon from "@material-ui/icons/Category";
@@ -51,15 +52,15 @@ const menu = [
     sub: [
       {
         title: t("buyFromUs"),
-        path: "/menu",
+        path: "/buy",
       },
       {
         title: t("sellToUs"),
-        path: "/menu",
+        path: "/sell",
       },
       {
         title: t("livePrice"),
-        path: "/menu",
+        path: "/live",
       },
     ],
   },
@@ -91,6 +92,7 @@ const menu = [
 ];
 
 export default function () {
+  const [width, height] = useWindowSize();
   const history = useHistory();
   const location = useLocation();
   const {
@@ -98,8 +100,8 @@ export default function () {
   } = useStorage();
   const [collapsed, setCollapsed] = useState(false);
   useEffect(() => {
-    // setLoading(true);
-  }, []);
+    setCollapsed(width < 900);
+  }, [width]);
   const goTo = (path) => {
     history.push(path);
   };

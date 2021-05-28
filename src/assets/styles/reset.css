@@ -67,6 +67,9 @@ h6 {
 ::-webkit-scrollbar-thumb {
   background-color: #555;
 }
+.scrollable {
+  overflow: auto;
+}
 .dropdown-menu {
   font-size: 0.8rem;
 }
@@ -113,4 +116,42 @@ figure {
 .fdc {
   display: flex;
   flex-direction: column;
+}
+.nav-tabs .nav-link {
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+.wizard-tabs {
+  background: #ebf8fc;
+  position: sticky;
+  top: 0px;
+  z-index: 99;
+  border: none;
+  justify-content: space-between;
+}
+.wizard-tabs .nav-link {
+  flex: 1;
+  border-radius: 2rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0.5rem;
+}
+
+.wizard-tabs.nav-item.show .nav-link,
+.wizard-tabs .nav-link.active {
+  color: #fff;
+  background-color: #528ca4;
+  border: none;
+}
+.pointer {
+  cursor: pointer;
+}
+.border-right {
+  border-right: 1px solid #eee;
+}
+.sticky-top {
+  position: sticky;
+  top: 0;
 }

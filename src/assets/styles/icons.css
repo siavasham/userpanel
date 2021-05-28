@@ -89,6 +89,11 @@
 .icon-btc:before {
   content: "\f119";
 }
+.icon-ir:before {
+  font-family: Georgia, "Times New Roman" !important;
+  content: "IR";
+  font-size: 1.2rem;
+}
 .icon-btg:before {
   content: "\f11a";
 }
@@ -1402,6 +1407,18 @@ textarea {
 .icon-btc,
 .bg-btc {
   background: linear-gradient(to bottom, #ffa639 0%, #f76a1a 100%);
+}
+.icon-ir,
+.bg-ir {
+  background: linear-gradient(to bottom, #545454 0%, #000000 100%);
+  background-clip: inherit !important;
+  -webkit-background-clip: inherit !important;
+  border-radius: 50%;
+  -webkit-text-fill-color: #fff !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 .icon-bsv,
 .bg-bsv {

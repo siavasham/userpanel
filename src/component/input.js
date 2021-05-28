@@ -14,7 +14,9 @@ export default function ({
 }) {
   return (
     <div className={"form-group mb-3 "}>
-      <label htmlFor={name}>{t(name)}</label>
+      <label className={"mb-2 ps-1"} htmlFor={name}>
+        {t(name)}
+      </label>
       {data ? (
         <select
           id={name}

@@ -48,7 +48,7 @@ export function clone(arr) {
 
 export function toMoney(amount) {
   if (typeof amount == "undefined" || amount == "null") return "";
-  if (amount.length < 2) return amount + "";
+  if (amount.length < 2 || amount < 1) return amount + "";
   return ("" + amount)
     .replace(/,/g, "")
     .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");

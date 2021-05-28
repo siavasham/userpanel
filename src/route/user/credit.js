@@ -7,7 +7,7 @@ import Input from "component/input";
 import Spinner from "component/spinner";
 import { banks } from "library/const";
 import Alert from "react-bootstrap/Alert";
-import _ from "lodash";
+import isEmpty from "lodash/isEmpty";
 
 export default function () {
   const [loading, setLoading] = useState(false);
@@ -34,11 +34,10 @@ export default function () {
   }, []);
   const validate = () => {
     const temp = {};
-    console.log(data);
     for (let i in data) {
       if (data[i] == "") temp[i] = "validation.empty";
     }
-    const res = _.isEmpty(temp) ? null : temp;
+    const res = isEmpty(temp) ? null : temp;
     setError(res);
     return res;
   };
@@ -67,7 +66,9 @@ export default function () {
         <div className="col-sm-12 col-md-7 mb-4 banks">
           {banks.map((item, i) => (
             <div
-              className={"bank-item " + (data?.code == item ? "active" : "")}
+              className={
+                "bank-item hover " + (data?.code == item ? "active" : "")
+              }
               key={i}
               onClick={() => onChange("code", item)}
             >
@@ -75,8 +76,12 @@ export default function () {
             </div>
           ))}
         </div>
-        <div className="col-sm-12 col-md-4  mb-5">
-          <form className="mt-3 m-1" autoComplete="off" onSubmit={onSubmit}>
+        <div className="col-sm-12 col-md-5  mb-5">
+          <form
+            className="mt-3 m-1 sticky-top"
+            autoComplete="off"
+            onSubmit={onSubmit}
+          >
             <Input
               name={"credit"}
               value={data?.number}

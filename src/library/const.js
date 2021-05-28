@@ -25,3 +25,4 @@ export const banks = [
   "tourism",
   "bim",
 ];
+export const fiat = ["IR"];

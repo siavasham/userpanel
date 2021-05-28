@@ -309,6 +309,12 @@
   .pro-menu-item.active
   > .pro-inner-item
   > .pro-icon-wrapper
+  .pro-icon,
+.pro-sidebar
+  .pro-menu
+  .pro-menu-item.open
+  > .pro-inner-item
+  > .pro-icon-wrapper
   .pro-icon {
   color: #ed572f;
 }
