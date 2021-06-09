@@ -20,6 +20,7 @@ import HistoryIcon from "@material-ui/icons/History";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 
 const menu = [
   {
@@ -89,6 +90,11 @@ const menu = [
     path: "/inbox",
     icon: <ChatBubbleOutlineIcon />,
   },
+  {
+    title: t("logout"),
+    path: "logout",
+    icon: <PowerSettingsNewIcon />,
+  },
 ];
 
 export default function () {
@@ -97,13 +103,21 @@ export default function () {
   const location = useLocation();
   const {
     setting: { name },
+    setSetting,
   } = useStorage();
   const [collapsed, setCollapsed] = useState(false);
   useEffect(() => {
     setCollapsed(width < 900);
   }, [width]);
   const goTo = (path) => {
-    history.push(path);
+    if (path == "logout") {
+      logOut();
+    } else {
+      history.push(path);
+    }
+  };
+  const logOut = (e) => {
+    setSetting(null);
   };
   return (
     <div className="left-sidebar">

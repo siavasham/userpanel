@@ -6,6 +6,7 @@ import { checkPhoneNumber } from "library/mobile";
 import Button from "component/button";
 import loginImage from "assets/images/login.png";
 import { useHistory } from "react-router-dom";
+import { numEn } from "library/helper";
 
 export default function () {
   const { session, setSession, setSetting } = useStorage();
@@ -14,7 +15,7 @@ export default function () {
   const history = useHistory();
 
   const onChange = (name, value) => {
-    setSession({ [name]: value });
+    setSession({ [name]: numEn(value) });
   };
 
   const onSubmit = (e) => {
@@ -26,6 +27,7 @@ export default function () {
       post("login", { phone }).then((data) => {
         setLoading(false);
         if (data.success) {
+          onChange("type", data.success.type);
           history.push("/verify");
         } else if (data.error) {
           setError(data.error);

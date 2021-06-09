@@ -5,6 +5,7 @@ import useStorage from "reducer";
 import Button from "component/button";
 import loginImage from "assets/images/login.png";
 import { Link, useHistory } from "react-router-dom";
+import { numEn } from "library/helper";
 
 export default function () {
   const { session, setSession, setSetting } = useStorage();
@@ -13,7 +14,7 @@ export default function () {
   const history = useHistory();
 
   const onChange = (name, value) => {
-    setSession({ [name]: value });
+    setSession({ [name]: numEn(value) });
   };
 
   const onSubmit = (e) => {
@@ -66,9 +67,38 @@ export default function () {
                 <div className="alert alert-warning mt-3">{t(error)}</div>
               )}
             </div>
+            {session?.type == "login" ? (
+              <div className="mb-3">
+                <label htmlFor="auth" className="form-label">
+                  {t("googleAuth")}
+                </label>
+                <input
+                  type="text"
+                  className="form-control text-center"
+                  id="auth"
+                  maxLength={5}
+                  value={session?.auth}
+                  onChange={(e) => onChange("auth", e.target.value)}
+                />
+              </div>
+            ) : (
+              <div className="mb-3">
+                <label htmlFor="ref" className="form-label">
+                  {t("refCode")}
+                </label>
+                <input
+                  type="text"
+                  className="form-control text-center"
+                  id="ref"
+                  maxLength={5}
+                  value={session?.ref}
+                  onChange={(e) => onChange("ref", e.target.value)}
+                />
+              </div>
+            )}
             <div className="d-grid gap-2 mt-5">
               <Button className="btn btn-danger btn-red" loading={loading}>
-                {t("login")}
+                {session?.type == "login" ? t("signIn") : t("signUp")}
               </Button>
             </div>
           </form>

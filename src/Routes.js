@@ -10,6 +10,7 @@ import {
 import useStorage from "reducer";
 import Spinner from "component/spinner";
 
+const Index = lazy(() => import("route/index/"));
 const Login = lazy(() => import("route/login/login"));
 const Verify = lazy(() => import("route/login/verify"));
 const Dashboard = lazy(() => import("route/dashboard/dashboard"));
@@ -23,6 +24,7 @@ const Inbox = lazy(() => import("route/inbox/inbox"));
 
 const route = {
   home: [
+    { path: "/", component: Index },
     { path: "/dashboard", component: Dashboard },
     { path: "/inbox", component: Inbox },
     { path: "/info", component: Info },
@@ -34,6 +36,7 @@ const route = {
   ],
   sign: [
     { path: "/login", component: Login },
+    { path: "/", component: Index },
     { path: "/verify", component: Verify },
   ],
 };
@@ -53,7 +56,8 @@ const AppRoutes = (props) => {
         {list.map((route, i) => (
           <Route key={i} exact path={route.path} component={route.component} />
         ))}
-        {!isRoute && <Redirect to={isLoged ? "/dashboard" : "/login"} />}
+        {/* {!isRoute && <Redirect to={isLoged ? "/dashboard" : "/login"} />} */}
+        <Redirect to={"/"} />
       </Switch>
     </Suspense>
   );

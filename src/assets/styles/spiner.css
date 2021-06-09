@@ -3,7 +3,9 @@
   justify-content: center;
   align-items: center;
   height: calc(100vh - 5.5rem);
-  position: absolute;
+  position: fixed;
+  top: 0;
+  right: 0;
   width: calc(100% - 4rem);
   z-index: 9999;
 }

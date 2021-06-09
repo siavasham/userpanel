@@ -25,13 +25,17 @@
 
 body {
   height: 100vh;
-  overflow: hidden;
   margin: 0;
   font-family: "iranyekan", Tahoma, sans-serif;
   font-size: 0.8rem;
   color: #5c7eab;
 }
 #root {
+  height: 100vh;
+  /* display: flex; */
+  flex: 1;
+}
+.root {
   height: 100vh;
   display: flex;
   flex: 1;
@@ -96,6 +100,10 @@ figure {
 }
 .f {
   display: flex;
+  flex: 1;
+}
+.f.g {
+  flex-grow: 1;
 }
 .fc {
   display: flex;
@@ -104,6 +112,9 @@ figure {
 }
 .f.jb {
   justify-content: space-between;
+}
+.f.jc {
+  justify-content: center;
 }
 .f.js {
   justify-content: flex-start;
@@ -118,6 +129,10 @@ figure {
 .fdc {
   display: flex;
   flex-direction: column;
+}
+.fdr {
+  display: flex;
+  flex-direction: row;
 }
 .nav-tabs .nav-link {
   padding: 1rem;
@@ -162,4 +177,11 @@ figure {
 }
 input[type="file"] {
   display: none;
+}
+.my-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.mc {
+  margin: 0 auto;
 }

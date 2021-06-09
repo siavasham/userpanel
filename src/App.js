@@ -8,7 +8,7 @@ import useStorage from "reducer";
 
 const App = (props) => {
   const { setSetting } = useStorage();
-  const [fullScreen, setFullscreen] = useState(true);
+  const [fullScreen, setFullscreen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -26,18 +26,22 @@ const App = (props) => {
   }, []);
 
   useEffect(() => {
-    const fullPageLayoutRoutes = ["/login", "/verify"];
+    const fullPageLayoutRoutes = ["/login", "/verify", "/"];
     setFullscreen(fullPageLayoutRoutes.includes(location.pathname));
   }, [location]);
 
-  return (
-    <>
-      {!fullScreen && <RightSidebar />}
-      <div className={fullScreen ? "fullScreen" : "page"}>
+  return !fullScreen ? (
+    <div className="root">
+      <RightSidebar />
+      <div className={"page"}>
         <AppRoutes />
       </div>
-      {!fullScreen && <LeftSidebar />}
-    </>
+      <LeftSidebar />
+    </div>
+  ) : (
+    <div className={"fullScreen"}>
+      <AppRoutes />
+    </div>
   );
 };
 
